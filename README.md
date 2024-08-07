@@ -1,5 +1,5 @@
-# stream-stats
-Deep dive trend analysis of an app similar to netflix
+
+Deep dive trend analysis of an app similar to Netflix
 
 # Overview
 This is the Architecture Diagram for Zattoo’s multi-tenant platform.
@@ -11,6 +11,8 @@ This is the Architecture Diagram for Zattoo’s multi-tenant platform.
 ### Source ingestion
 The applications/devices will generate events every 4 seconds and send them to the Kafka cluster. In Kafka, there are topics. The mentioned fields will go into Kafka in the form of topics. Then streams of topics are created, and those go to our Apache Flink (the event processing layer).
 
+![Architecture Diagram](internal-flow.png)
+
 ### Processing
 Flink will handle incoming events, validate them, and perform transformations or aggregations as needed. In this scenario, we are asked to check the stream every 4 seconds. Hence, we will pass that as the configuration, e.g., in one session how many streams we want to process, its interval.
 
@@ -20,7 +22,7 @@ Moreover, Flink does two things:
 
 2. **Managing states**:
     - **Updating Session State**: Flink checks the event_time with the last saved time for the session_id in the session_state topic. If the new event_time is in the time window, the session is still going. Flink updates the last event_time for that session in the session_state topic.
-    - **Timeout**: If no event happens for a session_id within the time window, it means the session is over.
+    - **Timeout**: If no event happens for a session_id within the time window, the session is over.
 
 3. After the window processing, the system checks if the session timed out (no event happened for 60 seconds after the last event_time).
 
