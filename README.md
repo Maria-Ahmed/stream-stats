@@ -3,7 +3,7 @@ Deep dive trend analysis of an app similar to netflix
 
 # Overview
 This is the Architecture Diagram for Zattoo’s multi-tenant platform.
-![Architecture Diagram](images/diagram-archi.png)
+![Architecture Diagram](diagram-archi.png)
 
 
 ## Internal flow
